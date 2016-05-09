@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+]>
+
+<Map srs="+init=epsg:3857" bgcolor="transparent">
+
+<Style name="fire_hydrant">
+  <Rule>
+  <MaxScaleDenominator>20000</MaxScaleDenominator>
+      <PointSymbolizer file="symbols/fire_hydrant.png"/>
+  </Rule>
+</Style>
+
+<Layer name="fire_hydrant" status="on"  srs="+init=epsg:3857">
+  <StyleName>fire_hydrant</StyleName>
+  <Datasource>
+    <Parameter name="table">
+     (SELECT way
+        FROM planet_osm_point
+       WHERE tags->'emergency' = 'fire_hydrant'
+     ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+      <Parameter name="dbname">gis</Parameter>
+      <Parameter name="estimate_extent">false</Parameter>
+      <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
+      <Parameter name="user">maposmatic</Parameter>
+      <Parameter name="type">postgis</Parameter>
+      <Parameter name="port">5432</Parameter>
+  </Datasource>
+</Layer>
+
+</Map>
