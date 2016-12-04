@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE Map [
-<!ENTITY datasource-settings SYSTEM "datasource-settings.xml.inc">
+<!ENTITY datasource-settings SYSTEM "inc/datasource-settings.xml.inc">
 ]>
 
 <Map srs="+init=epsg:3857" bgcolor="transparent">
