@@ -19,20 +19,20 @@
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <Filter>[hydrant_type]='pillar'</Filter>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" 
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
                       file="symbols/pillar.svg" shield-dy="-4" min-distance="0" allow-overlap="true"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <MaxScaleDenominator>50000</MaxScaleDenominator>
     <Filter>[hydrant_type]='wall'</Filter>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" 
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True"
                       file="symbols/wall.svg" min-distance="0" allow-overlap="true"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <ElseFilter/>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" 
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
                       file="symbols/underground.svg" min-distance="0" allow-overlap="true"
      >[diameter]</ShieldSymbolizer>
   </Rule>
