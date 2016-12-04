@@ -5,6 +5,12 @@
 
 <Map srs="+init=epsg:3857" bgcolor="transparent">
 
+<Style name="fire_station">
+  <Rule>
+    <PointSymbolizer file="symbols/station.svg"/>
+  </Rule>
+</Style>
+
 <Style name="fire_hydrant">
   <Rule>
     <Filter>[hydrant_type]='pillar'</Filter>
@@ -19,6 +25,20 @@
      >[diameter]</ShieldSymbolizer>
   </Rule>
 </Style>
+
+<Layer name="fire_station" status="on"  srs="+init=epsg:3857">
+  <StyleName>fire_station</StyleName>
+  <Datasource>
+    <Parameter name="table">
+     (SELECT way FROM planet_osm_point WHERE amenity='fire_station'
+	UNION
+      SELECT way FROM planet_osm_polygon WHERE amenity='fire_station'
+     ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
 
 <Layer name="fire_hydrant" status="on"  srs="+init=epsg:3857">
   <StyleName>fire_hydrant</StyleName>
