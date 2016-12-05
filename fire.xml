@@ -38,6 +38,14 @@
   </Rule>
 </Style>
 
+<Style name="emergency_access_point">
+  <Rule>
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
+                      file="symbols/emergency_access_point.svg" min-distance="0" allow-overlap="true"
+     >[name]</ShieldSymbolizer>
+  </Rule>
+</Style>
+
 <Layer name="fire_station" status="on"  srs="+init=epsg:3857">
   <StyleName>fire_station</StyleName>
   <Datasource>
@@ -61,6 +69,20 @@
         tags->'fire_hydrant:type'     AS hydrant_type
         FROM planet_osm_point
        WHERE tags->'emergency' = 'fire_hydrant'
+     ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
+
+<Layer name="emergency_access_point" status="on"  srs="+init=epsg:3857">
+  <StyleName>emergency_access_point</StyleName>
+  <Datasource>
+    <Parameter name="table">
+     (SELECT way, COALESCE(name,ref) AS name
+        FROM planet_osm_point
+       WHERE highway = 'emergency_access_point'
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
