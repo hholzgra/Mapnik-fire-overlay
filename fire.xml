@@ -46,6 +46,12 @@
   </Rule>
 </Style>
 
+<Style name="defibrillator">
+  <Rule>
+    <PointSymbolizer file="symbols/defibrillator.svg" />
+  </Rule>
+</Style>
+
 <Layer name="fire_station" status="on"  srs="+init=epsg:3857">
   <StyleName>fire_station</StyleName>
   <Datasource>
@@ -83,6 +89,20 @@
      (SELECT way, COALESCE(name,ref) AS name
         FROM planet_osm_point
        WHERE highway = 'emergency_access_point'
+     ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
+
+<Layer name="defibrillator" status="on"  srs="+init=epsg:3857">
+  <StyleName>defibrillator</StyleName>
+  <Datasource>
+    <Parameter name="table">
+     (SELECT way
+        FROM planet_osm_point
+       WHERE tags->'emergency' = 'defibrillator'
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
