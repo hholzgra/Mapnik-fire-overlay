@@ -52,6 +52,20 @@
   </Rule>
 </Style>
 
+<Style name="pond">
+  <Rule>
+    <PointSymbolizer file="symbols/pond.svg" />
+  </Rule>
+</Style>
+
+<Style name="tank">
+  <Rule>
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
+                      file="symbols/water_tank.svg" min-distance="0" allow-overlap="true"
+     >[volume]</ShieldSymbolizer>
+  </Rule>
+</Style>
+
 <Layer name="fire_station" status="on"  srs="+init=epsg:3857">
   <StyleName>fire_station</StyleName>
   <Datasource>
@@ -109,5 +123,52 @@
     &datasource-settings;
   </Datasource>
 </Layer>
+
+<Layer name="suction" status="on"  srs="+init=epsg:3857">
+  <StyleName>pond</StyleName>
+  <Datasource>
+    <Parameter name="table">
+     (SELECT way
+        FROM planet_osm_point
+       WHERE tags->'emergency' = 'suction_point'
+     ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
+
+<Layer name="pond" status="on"  srs="+init=epsg:3857">
+  <StyleName>pond</StyleName>
+  <Datasource>
+    <Parameter name="table">
+     (SELECT way FROM planet_osm_point WHERE tags->'emergency'='fire_water_pond'
+        UNION
+      SELECT way FROM planet_osm_polygon WHERE tags->'emergency'='fire_water_pond'
+     ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
+
+<Layer name="tank" status="on"  srs="+init=epsg:3857">
+  <StyleName>tank</StyleName>
+  <Datasource>
+    <Parameter name="table">
+     (SELECT way, CONCAT(CAST(tags->'water_tank:volume' AS bigint)/1000,'m²') AS volume
+        FROM planet_osm_point 
+       WHERE tags->'emergency'='water_tank'
+      UNION
+      SELECT way, CONCAT(CAST(tags->'water_tank:volume' AS bigint)/1000,'m²') AS volume
+        FROM planet_osm_polygon 
+       WHERE tags->'emergency'='water_tank'
+     ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
+
 
 </Map>
