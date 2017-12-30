@@ -163,11 +163,11 @@
   <StyleName>tank</StyleName>
   <Datasource>
     <Parameter name="table">
-     (SELECT way, CONCAT(CAST(tags->'water_tank:volume' AS bigint)/1000,'m²') AS volume
+     (SELECT way, CONCAT(ROUND(REGEXP_REPLACE(COALESCE(tags->'water_tank:volume', '0'), '[^0-9\.]+', '', 'g')::float), 'm³') AS volume
         FROM planet_osm_point 
        WHERE tags->'emergency'='water_tank'
       UNION
-      SELECT way, CONCAT(CAST(tags->'water_tank:volume' AS bigint)/1000,'m²') AS volume
+      SELECT way, CONCAT(ROUND(REGEXP_REPLACE(COALESCE(tags->'water_tank:volume', '0'), '[^0-9\.]+', '', 'g')::float), 'm³') AS volume
         FROM planet_osm_polygon 
        WHERE tags->'emergency'='water_tank'
      ) AS way
