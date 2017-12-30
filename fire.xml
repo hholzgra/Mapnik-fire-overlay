@@ -27,20 +27,20 @@
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='pillar'</Filter>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
-                      file="symbols/pillar.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7"
+                      file="symbols/pillar.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='wall'</Filter>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True"
-                      file="symbols/wall.svg" margin="0" allow-overlap="true" opacity="0.7"
+                      file="symbols/wall.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <ElseFilter/>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
-                      file="symbols/underground.svg" margin="0" allow-overlap="true" opacity="0.7"
+                      file="symbols/underground.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer>
   </Rule>
 </Style>
@@ -48,7 +48,7 @@
 <Style name="emergency_access_point">
   <Rule>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
-                      file="symbols/emergency_access_point.svg" margin="0" allow-overlap="true" opacity="0.7"
+                      file="symbols/emergency_access_point.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[name]</ShieldSymbolizer>
   </Rule>
 </Style>
@@ -68,7 +68,7 @@
 <Style name="tank">
   <Rule>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
-                      file="symbols/water_tank.svg" margin="0" allow-overlap="true" opacity="0.7"
+                      file="symbols/water_tank.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[volume]</ShieldSymbolizer>
   </Rule>
 </Style>
