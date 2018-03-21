@@ -3,37 +3,44 @@
 <!ENTITY datasource-settings SYSTEM "inc/datasource-settings.xml.inc">
 ]>
 
-<Map srs="+init=epsg:3857" bgcolor="transparent">
+<Map srs="+init=epsg:3857" background-color="#00000000">
 
 <Style name="fire_station">
   <Rule>
+    <MinScaleDenominator>100000</MinScaleDenominator>
     <PointSymbolizer file="symbols/station.svg"/>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000</MaxScaleDenominator>
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
+                      file="symbols/station.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
+     >[name]</ShieldSymbolizer> 
   </Rule>
 </Style>
 
 <Style name="fire_hydrant">
   <Rule>
     <MinScaleDenominator>20000</MinScaleDenominator>
-    <PointSymbolizer file="symbols/lowzoom.svg"/>
+    <PointSymbolizer file="symbols/lowzoom.svg" opacity="0.7"/>
   </Rule>
   <Rule>
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='pillar'</Filter>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
-                      file="symbols/pillar.svg" shield-dy="-4" min-distance="0" allow-overlap="true"
+                      file="symbols/pillar.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='wall'</Filter>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True"
-                      file="symbols/wall.svg" min-distance="0" allow-overlap="true"
+                      file="symbols/wall.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <ElseFilter/>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
-                      file="symbols/underground.svg" min-distance="0" allow-overlap="true"
+                      file="symbols/underground.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer>
   </Rule>
 </Style>
@@ -41,27 +48,27 @@
 <Style name="emergency_access_point">
   <Rule>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
-                      file="symbols/emergency_access_point.svg" min-distance="0" allow-overlap="true"
+                      file="symbols/emergency_access_point.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[name]</ShieldSymbolizer>
   </Rule>
 </Style>
 
 <Style name="defibrillator">
   <Rule>
-    <PointSymbolizer file="symbols/defibrillator.svg" />
+    <PointSymbolizer file="symbols/defibrillator.svg"  opacity="0.7"/>
   </Rule>
 </Style>
 
 <Style name="pond">
   <Rule>
-    <PointSymbolizer file="symbols/pond.svg" />
+    <PointSymbolizer file="symbols/pond.svg"  opacity="0.7"/>
   </Rule>
 </Style>
 
 <Style name="tank">
   <Rule>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
-                      file="symbols/water_tank.svg" min-distance="0" allow-overlap="true"
+                      file="symbols/water_tank.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[volume]</ShieldSymbolizer>
   </Rule>
 </Style>
@@ -70,9 +77,9 @@
   <StyleName>fire_station</StyleName>
   <Datasource>
     <Parameter name="table">
-     (SELECT way FROM planet_osm_point WHERE amenity='fire_station'
+     (SELECT way, COALESCE(tags->'short_name', name) AS name FROM planet_osm_point WHERE amenity='fire_station'
 	UNION
-      SELECT way FROM planet_osm_polygon WHERE amenity='fire_station'
+      SELECT way, COALESCE(tags->'short_name', name) AS name FROM planet_osm_polygon WHERE amenity='fire_station'
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
