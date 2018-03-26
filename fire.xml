@@ -166,14 +166,14 @@
   <StyleName>tank</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
-     (SELECT way, CONCAT(ROUND(REGEXP_REPLACE(COALESCE(tags->'water_tank:volume', '0'), '[^0-9\.]+', '', 'g')::float), 'm³') AS volume
-        FROM planet_osm_point 
-       WHERE tags->'emergency'='water_tank'
+      (SELECT way, convert_volume(tags->'water_tank:volume') AS volume
+         FROM planet_osm_point
+        WHERE tags->'emergency'='water_tank'
       UNION
-      SELECT way, CONCAT(ROUND(REGEXP_REPLACE(COALESCE(tags->'water_tank:volume', '0'), '[^0-9\.]+', '', 'g')::float), 'm³') AS volume
-        FROM planet_osm_polygon 
-       WHERE tags->'emergency'='water_tank'
-     ) AS way
+       SELECT way, convert_volume(tags->'water_tank:volume') AS volume
+         FROM planet_osm_polygon
+        WHERE tags->'emergency'='water_tank'
+      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
   </Datasource>
