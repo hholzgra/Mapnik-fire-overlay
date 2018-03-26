@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE Map [
-<!ENTITY datasource-settings SYSTEM "inc/datasource-settings.xml.inc">
-]>
-
 <Map srs="+init=epsg:3857" background-color="#00000000">
+
+<Datasource name="gis">
+  <Parameter name="type">postgis</Parameter>
+  <Parameter name="host">gis-db</Parameter>
+  <Parameter name="port">5432</Parameter>
+  <Parameter name="dbname">gis</Parameter>
+  <Parameter name="user">maposmatic</Parameter>
+  <Parameter name="password">secret</Parameter>
+  <Parameter name="estimate_extent">false</Parameter>
+  <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
+</Datasource>
+
+<FileSource name="symbols">symbols</FileSource>
 
 <Style name="fire_station">
   <Rule>
     <MinScaleDenominator>100000</MinScaleDenominator>
-    <PointSymbolizer file="symbols/station.svg"/>
+    <PointSymbolizer base="symbols" file="station.svg"/>
   </Rule>
   <Rule>
     <MaxScaleDenominator>100000</MaxScaleDenominator>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
-                      file="symbols/station.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
+                      base="symbols" file="station.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[name]</ShieldSymbolizer> 
   </Rule>
 </Style>
@@ -21,26 +30,26 @@
 <Style name="fire_hydrant">
   <Rule>
     <MinScaleDenominator>20000</MinScaleDenominator>
-    <PointSymbolizer file="symbols/lowzoom.svg" opacity="0.7"/>
+    <PointSymbolizer base="symbols" file="lowzoom.svg" opacity="0.7"/>
   </Rule>
   <Rule>
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='pillar'</Filter>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
-                      file="symbols/pillar.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
+                      base="symbols" file="pillar.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='wall'</Filter>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True"
-                      file="symbols/wall.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
+                      base="symbols" file="wall.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <ElseFilter/>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
-                      file="symbols/underground.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
+                      base="symbols" file="underground.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer>
   </Rule>
 </Style>
@@ -48,34 +57,34 @@
 <Style name="emergency_access_point">
   <Rule>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
-                      file="symbols/emergency_access_point.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
+                       base="symbols" file="emergency_access_point.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[name]</ShieldSymbolizer>
   </Rule>
 </Style>
 
 <Style name="defibrillator">
   <Rule>
-    <PointSymbolizer file="symbols/defibrillator.svg"  opacity="0.7"/>
+    <PointSymbolizer base="symbols" file="defibrillator.svg"  opacity="0.7"/>
   </Rule>
 </Style>
 
 <Style name="pond">
   <Rule>
-    <PointSymbolizer file="symbols/pond.svg"  opacity="0.7"/>
+    <PointSymbolizer base="symbols" file="pond.svg"  opacity="0.7"/>
   </Rule>
 </Style>
 
 <Style name="tank">
   <Rule>
     <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
-                      file="symbols/water_tank.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
+                      base="symbols" file="water_tank.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[volume]</ShieldSymbolizer>
   </Rule>
 </Style>
 
 <Layer name="fire_station" status="on"  srs="+init=epsg:3857">
   <StyleName>fire_station</StyleName>
-  <Datasource>
+  <Datasource base="gis">
     <Parameter name="table">
      (SELECT way, COALESCE(tags->'short_name', name) AS name FROM planet_osm_point WHERE amenity='fire_station'
 	UNION
@@ -83,13 +92,12 @@
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
-    &datasource-settings;
   </Datasource>
 </Layer>
 
 <Layer name="fire_hydrant" status="on"  srs="+init=epsg:3857">
   <StyleName>fire_hydrant</StyleName>
-  <Datasource>
+  <Datasource base="gis">
     <Parameter name="table">
      (SELECT way,
         tags->'fire_hydrant:diameter' AS diameter,
@@ -99,13 +107,12 @@
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
-    &datasource-settings;
   </Datasource>
 </Layer>
 
 <Layer name="emergency_access_point" status="on"  srs="+init=epsg:3857">
   <StyleName>emergency_access_point</StyleName>
-  <Datasource>
+  <Datasource base="gis">
     <Parameter name="table">
      (SELECT way, COALESCE(name,ref) AS name
         FROM planet_osm_point
@@ -113,13 +120,12 @@
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
-    &datasource-settings;
   </Datasource>
 </Layer>
 
 <Layer name="defibrillator" status="on"  srs="+init=epsg:3857">
   <StyleName>defibrillator</StyleName>
-  <Datasource>
+  <Datasource base="gis">
     <Parameter name="table">
      (SELECT way
         FROM planet_osm_point
@@ -127,13 +133,12 @@
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
-    &datasource-settings;
   </Datasource>
 </Layer>
 
 <Layer name="suction" status="on"  srs="+init=epsg:3857">
   <StyleName>pond</StyleName>
-  <Datasource>
+  <Datasource base="gis">
     <Parameter name="table">
      (SELECT way
         FROM planet_osm_point
@@ -141,13 +146,12 @@
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
-    &datasource-settings;
   </Datasource>
 </Layer>
 
 <Layer name="pond" status="on"  srs="+init=epsg:3857">
   <StyleName>pond</StyleName>
-  <Datasource>
+  <Datasource base="gis">
     <Parameter name="table">
      (SELECT way FROM planet_osm_point WHERE tags->'emergency'='fire_water_pond'
         UNION
@@ -155,13 +159,12 @@
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
-    &datasource-settings;
   </Datasource>
 </Layer>
 
 <Layer name="tank" status="on"  srs="+init=epsg:3857">
   <StyleName>tank</StyleName>
-  <Datasource>
+  <Datasource base="gis">
     <Parameter name="table">
      (SELECT way, CONCAT(ROUND(REGEXP_REPLACE(COALESCE(tags->'water_tank:volume', '0'), '[^0-9\.]+', '', 'g')::float), 'm³') AS volume
         FROM planet_osm_point 
@@ -173,7 +176,6 @@
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
-    &datasource-settings;
   </Datasource>
 </Layer>
 
