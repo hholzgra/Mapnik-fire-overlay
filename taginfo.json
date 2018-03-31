@@ -1,0 +1,71 @@
+{
+    "project": {
+        "contact_name": "Hartmut Holzgraefe", 
+        "contact_email": "hartmut@php.net", 
+        "name": "Keys used in fire/emergency overlay", 
+        "project_url": "https://github.com/hholzgra/Mapnik-fire-overlay",
+	"icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/station.svg",
+        "description": "This files contains all keys used in the fire/emergency overlay style"
+    }, 
+    "data_format": 1, 
+    "tags": [
+        {
+	    "description": "Fire stations",
+            "key": "amenity",
+	    "value": "fire_station",
+            "object_types": [
+                "point", 
+                "polygon"
+            ]
+        },
+	{
+	    "description": "Hydrants",
+            "key": "emergency",
+	    "value": "fire_hydrant",
+            "object_types": [
+                "point" 
+            ]	    
+        },
+	{
+	    "description": "Suction points",
+            "key": "emergency",
+	    "value": "suction_point",
+            "object_types": [
+                "point"
+            ]	    
+        },
+	{
+	    "description": "Fire water ponds",
+            "key": "emergency",
+	    "value": "fire_water_pond",
+            "object_types": [
+                "point"
+            ]	    
+        },
+	{
+	    "description": "Water tanks",
+            "key": "emergency",
+	    "value": "water_tank",
+            "object_types": [
+                "point",
+		"polygon"
+            ] 
+        },
+	{
+	    "description": "Emergency access points",
+            "key": "highway",
+	    "value": "emergency_access_point",
+            "object_types": [
+                "point"
+            ]    
+        },
+	{
+	    "description": "Defibrillator",
+            "key": "emergency",
+	    "value": "defibrillator",
+            "object_types": [
+                "point"
+            ]  
+        }
+    ]
+}
