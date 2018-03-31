@@ -15,7 +15,7 @@
 	    "value": "fire_station",
             "object_types": [
                 "point", 
-                "polygon"
+                "area"
             ]
         },
 	{
@@ -48,7 +48,7 @@
 	    "value": "water_tank",
             "object_types": [
                 "point",
-		"polygon"
+		"area"
             ] 
         },
 	{
