@@ -2,7 +2,7 @@
     "project": {
         "contact_name": "Hartmut Holzgraefe", 
         "contact_email": "hartmut@php.net", 
-        "name": "Fire/emergency overlay", 
+        "name": "Fire/emergency Mapnik overlay style", 
         "project_url": "https://github.com/hholzgra/Mapnik-fire-overlay",
 	"icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pillar.png",
         "description": "This files contains all keys used in the fire/emergency overlay style"
