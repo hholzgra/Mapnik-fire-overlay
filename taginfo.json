@@ -2,9 +2,9 @@
     "project": {
         "contact_name": "Hartmut Holzgraefe", 
         "contact_email": "hartmut@php.net", 
-        "name": "Keys used in fire/emergency overlay", 
+        "name": "Fire/emergency overlay", 
         "project_url": "https://github.com/hholzgra/Mapnik-fire-overlay",
-	"icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/station.svg",
+	"icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pillar.png",
         "description": "This files contains all keys used in the fire/emergency overlay style"
     }, 
     "data_format": 1, 
@@ -13,8 +13,9 @@
 	    "description": "Fire stations",
             "key": "amenity",
 	    "value": "fire_station",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/station.png",
             "object_types": [
-                "point", 
+                "node", 
                 "area"
             ]
         },
@@ -22,32 +23,36 @@
 	    "description": "Hydrants",
             "key": "emergency",
 	    "value": "fire_hydrant",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pillar.png",
             "object_types": [
-                "point" 
+                "node" 
             ]	    
         },
 	{
 	    "description": "Suction points",
             "key": "emergency",
 	    "value": "suction_point",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pong.png",
             "object_types": [
-                "point"
+                "node"
             ]	    
         },
 	{
 	    "description": "Fire water ponds",
             "key": "emergency",
 	    "value": "fire_water_pond",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pong.png",
             "object_types": [
-                "point"
+                "node"
             ]	    
         },
 	{
 	    "description": "Water tanks",
             "key": "emergency",
 	    "value": "water_tank",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/water_tank.png",
             "object_types": [
-                "point",
+                "node",
 		"area"
             ] 
         },
@@ -55,16 +60,18 @@
 	    "description": "Emergency access points",
             "key": "highway",
 	    "value": "emergency_access_point",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/emergency_access_point.png",
             "object_types": [
-                "point"
+                "node"
             ]    
         },
 	{
 	    "description": "Defibrillator",
             "key": "emergency",
 	    "value": "defibrillator",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/defibrillator.png",
             "object_types": [
-                "point"
+                "node"
             ]  
         }
     ]
