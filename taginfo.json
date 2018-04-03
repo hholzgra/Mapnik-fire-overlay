@@ -32,7 +32,7 @@
 	    "description": "Suction points",
             "key": "emergency",
 	    "value": "suction_point",
-	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pong.png",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pond.png",
             "object_types": [
                 "node"
             ]	    
@@ -41,9 +41,10 @@
 	    "description": "Fire water ponds",
             "key": "emergency",
 	    "value": "fire_water_pond",
-	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pong.png",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pond.png",
             "object_types": [
-                "node"
+                "node",
+                "area"
             ]	    
         },
 	{
