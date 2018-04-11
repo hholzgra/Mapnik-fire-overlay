@@ -29,6 +29,33 @@
             ]	    
         },
 	{
+	    "description": "Overground hydrant (pillar)",
+            "key": "fire_hydrant:type",
+	    "value": "pillar",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/pillar.png",
+            "object_types": [
+                "node" 
+            ]	    
+        },
+	{
+	    "description": "Underground hydrant",
+            "key": "fire_hydrant:type",
+	    "value": "underground",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/underground.png",
+            "object_types": [
+                "node" 
+            ]	    
+        },
+	{
+	    "description": "Wall hydrant",
+            "key": "fire_hydrant:type",
+	    "value": "wall",
+	    "icon_url": "https://raw.githubusercontent.com/hholzgra/Mapnik-fire-overlay/master/symbols/png/wall.png",
+            "object_types": [
+                "node" 
+            ]	    
+        },
+	{
 	    "description": "Suction points",
             "key": "emergency",
 	    "value": "suction_point",
