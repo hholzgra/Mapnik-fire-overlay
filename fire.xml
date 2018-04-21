@@ -86,17 +86,17 @@
     <Parameter name="table">
       (SELECT way,
               COALESCE(tags->'short_name', name) AS name,
-              fire_symbol_dir() AS base,
-              fire_symbol_color() AS color
+              fire_symbol_dir()                  AS base,
+              fire_symbol_color()                AS color
          FROM planet_osm_point
-        WHERE amenity='fire_station'
+        WHERE amenity = 'fire_station'
      UNION
        SELECT way,
               COALESCE(tags->'short_name', name) AS name,
-              fire_symbol_dir() AS base,
-              fire_symbol_color() AS color
+              fire_symbol_dir()                  AS base,
+              fire_symbol_color()                AS color
          FROM planet_osm_polygon
-        WHERE amenity='fire_station'
+        WHERE amenity = 'fire_station'
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
@@ -125,8 +125,8 @@
   <Datasource base="gis">
     <Parameter name="table">
      (SELECT way,
-             COALESCE(name,ref) AS name,
-             fire_symbol_dir()  AS base,
+             COALESCE(name,ref)  AS name,
+             fire_symbol_dir()   AS base,
              fire_symbol_color() AS color
         FROM planet_osm_point
        WHERE highway = 'emergency_access_point'
@@ -141,7 +141,7 @@
   <Datasource base="gis">
     <Parameter name="table">
      (SELECT way,
-             fire_symbol_dir() AS base,
+             fire_symbol_dir()   AS base,
              fire_symbol_color() AS color
         FROM planet_osm_point
        WHERE tags->'emergency' = 'defibrillator'
@@ -156,7 +156,7 @@
   <Datasource base="gis">
     <Parameter name="table">
      (SELECT way,
-             fire_symbol_dir() AS base,
+             fire_symbol_dir()   AS base,
              fire_symbol_color() AS color
         FROM planet_osm_point
        WHERE tags->'emergency' = 'suction_point'
@@ -171,16 +171,16 @@
   <Datasource base="gis">
     <Parameter name="table">
       (SELECT way,
-              fire_symbol_dir() AS base,
+              fire_symbol_dir()   AS base,
               fire_symbol_color() AS color
          FROM planet_osm_point
-        WHERE tags->'emergency'='fire_water_pond'
+        WHERE tags->'emergency' = 'fire_water_pond'
       UNION
        SELECT way,
-              fire_symbol_dir() AS base,
+              fire_symbol_dir()   AS base,
               fire_symbol_color() AS color
          FROM planet_osm_polygon
-        WHERE tags->'emergency'='fire_water_pond'
+        WHERE tags->'emergency' = 'fire_water_pond'
      ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
@@ -193,17 +193,17 @@
     <Parameter name="table">
       (SELECT way,
               convert_volume(tags->'water_tank:volume') AS volume,
-              fire_symbol_dir() AS base,
+              fire_symbol_dir()   AS base,
               fire_symbol_color() AS color
          FROM planet_osm_point
-        WHERE tags->'emergency'='water_tank'
+        WHERE tags->'emergency' = 'water_tank'
       UNION
        SELECT way,
               convert_volume(tags->'water_tank:volume') AS volume,
-              fire_symbol_dir() AS base,
-              fire_symbol_color() AS color
+              fire_symbol_dir()                         AS base,
+              fire_symbol_color()                       AS color
          FROM planet_osm_polygon
-        WHERE tags->'emergency'='water_tank'
+        WHERE tags->'emergency' = 'water_tank'
       ) AS way
     </Parameter>
     <Parameter name="geometry_field">way</Parameter>
