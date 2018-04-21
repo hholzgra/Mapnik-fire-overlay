@@ -19,7 +19,7 @@
   </Rule>
   <Rule>
     <MaxScaleDenominator>100000</MaxScaleDenominator>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="red" dx="0" dy="14" unlock-image="True"
                       file="[base]/station.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[name]</ShieldSymbolizer> 
   </Rule>
@@ -33,20 +33,20 @@
   <Rule>
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='pillar'</Filter>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="[color]" dx="0" dy="14" unlock-image="True"
                       file="[base]/pillar.svg" shield-dy="-4" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <MaxScaleDenominator>20000</MaxScaleDenominator>
     <Filter>[hydrant_type]='wall'</Filter>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True"
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="[color]" dx="0" dy="10" unlock-image="True"
                       file="[base]/wall.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer> 
   </Rule>
   <Rule>
     <ElseFilter/>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="[color]" dx="0" dy="10" unlock-image="True" 
                       file="[base]/underground.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[diameter]</ShieldSymbolizer>
   </Rule>
@@ -54,7 +54,7 @@
 
 <Style name="emergency_access_point">
   <Rule>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="14" unlock-image="True"
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="red" dx="0" dy="14" unlock-image="True"
                        file="[base]/emergency_access_point.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[name]</ShieldSymbolizer>
   </Rule>
@@ -74,7 +74,7 @@
 
 <Style name="tank">
   <Rule>
-    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="#FF0000" dx="0" dy="10" unlock-image="True" 
+    <ShieldSymbolizer face-name="DejaVu Sans Bold" size="6" fill="[color]" dx="0" dy="10" unlock-image="True" 
                       file="[base]/water_tank.svg" margin="0" allow-overlap="true" opacity="0.7" halo-radius="1"
      >[volume]</ShieldSymbolizer>
   </Rule>
@@ -86,13 +86,15 @@
     <Parameter name="table">
       (SELECT way,
               COALESCE(tags->'short_name', name) AS name,
-              fire_symbol_dir() AS base
+              fire_symbol_dir() AS base,
+              fire_symbol_color() AS color
          FROM planet_osm_point
         WHERE amenity='fire_station'
      UNION
        SELECT way,
               COALESCE(tags->'short_name', name) AS name,
-              fire_symbol_dir() AS base
+              fire_symbol_dir() AS base,
+              fire_symbol_color() AS color
          FROM planet_osm_polygon
         WHERE amenity='fire_station'
      ) AS way
@@ -108,7 +110,8 @@
      (SELECT way,
         tags->'fire_hydrant:diameter' AS diameter,
         tags->'fire_hydrant:type'     AS hydrant_type,
-        fire_symbol_dir()             AS base
+        fire_symbol_dir()             AS base,
+        fire_symbol_color()           AS color
         FROM planet_osm_point
        WHERE tags->'emergency' = 'fire_hydrant'
      ) AS way
@@ -123,7 +126,8 @@
     <Parameter name="table">
      (SELECT way,
              COALESCE(name,ref) AS name,
-             fire_symbol_dir()  AS base
+             fire_symbol_dir()  AS base,
+             fire_symbol_color() AS color
         FROM planet_osm_point
        WHERE highway = 'emergency_access_point'
      ) AS way
@@ -137,7 +141,8 @@
   <Datasource base="gis">
     <Parameter name="table">
      (SELECT way,
-             fire_symbol_dir() AS base
+             fire_symbol_dir() AS base,
+             fire_symbol_color() AS color
         FROM planet_osm_point
        WHERE tags->'emergency' = 'defibrillator'
      ) AS way
@@ -151,7 +156,8 @@
   <Datasource base="gis">
     <Parameter name="table">
      (SELECT way,
-             fire_symbol_dir() AS base
+             fire_symbol_dir() AS base,
+             fire_symbol_color() AS color
         FROM planet_osm_point
        WHERE tags->'emergency' = 'suction_point'
      ) AS way
@@ -165,12 +171,14 @@
   <Datasource base="gis">
     <Parameter name="table">
       (SELECT way,
-              fire_symbol_dir() AS base
+              fire_symbol_dir() AS base,
+              fire_symbol_color() AS color
          FROM planet_osm_point
         WHERE tags->'emergency'='fire_water_pond'
       UNION
        SELECT way,
-              fire_symbol_dir() AS base
+              fire_symbol_dir() AS base,
+              fire_symbol_color() AS color
          FROM planet_osm_polygon
         WHERE tags->'emergency'='fire_water_pond'
      ) AS way
@@ -185,13 +193,15 @@
     <Parameter name="table">
       (SELECT way,
               convert_volume(tags->'water_tank:volume') AS volume,
-              fire_symbol_dir() AS base
+              fire_symbol_dir() AS base,
+              fire_symbol_color() AS color
          FROM planet_osm_point
         WHERE tags->'emergency'='water_tank'
       UNION
        SELECT way,
               convert_volume(tags->'water_tank:volume') AS volume,
-              fire_symbol_dir() AS base
+              fire_symbol_dir() AS base,
+              fire_symbol_color() AS color
          FROM planet_osm_polygon
         WHERE tags->'emergency'='water_tank'
       ) AS way
