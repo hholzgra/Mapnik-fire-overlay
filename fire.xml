@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Map srs="+init=epsg:3857" background-color="#00000000">
+<Map srs="epsg:3857">
 
 <Datasource name="gis">
   <Parameter name="type">postgis</Parameter>
@@ -80,7 +80,7 @@
   </Rule>
 </Style>
 
-<Layer name="fire_station" status="on"  srs="+init=epsg:3857">
+<Layer name="fire_station" status="on"  srs="epsg:3857">
   <StyleName>fire_station</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
@@ -103,7 +103,7 @@
   </Datasource>
 </Layer>
 
-<Layer name="fire_hydrant" status="on"  srs="+init=epsg:3857">
+<Layer name="fire_hydrant" status="on"  srs="epsg:3857">
   <StyleName>fire_hydrant</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
@@ -120,7 +120,7 @@
   </Datasource>
 </Layer>
 
-<Layer name="emergency_access_point" status="on"  srs="+init=epsg:3857">
+<Layer name="emergency_access_point" status="on"  srs="epsg:3857">
   <StyleName>emergency_access_point</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
@@ -136,7 +136,7 @@
   </Datasource>
 </Layer>
 
-<Layer name="defibrillator" status="on"  srs="+init=epsg:3857">
+<Layer name="defibrillator" status="on"  srs="epsg:3857">
   <StyleName>defibrillator</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
@@ -151,7 +151,7 @@
   </Datasource>
 </Layer>
 
-<Layer name="suction" status="on"  srs="+init=epsg:3857">
+<Layer name="suction" status="on"  srs="epsg:3857">
   <StyleName>pond</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
@@ -166,7 +166,7 @@
   </Datasource>
 </Layer>
 
-<Layer name="pond" status="on"  srs="+init=epsg:3857">
+<Layer name="pond" status="on"  srs="epsg:3857">
   <StyleName>pond</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
@@ -187,7 +187,7 @@
   </Datasource>
 </Layer>
 
-<Layer name="tank" status="on"  srs="+init=epsg:3857">
+<Layer name="tank" status="on"  srs="epsg:3857">
   <StyleName>tank</StyleName>
   <Datasource base="gis">
     <Parameter name="table">
